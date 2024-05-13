@@ -1,9 +1,7 @@
 package com.budgetify.app
 
-import com.budgetify.app.model.Budget
+import com.budgetify.app.data.model.Budget
 
-sealed class MainScreenUiState {
-    data object Loading : MainScreenUiState()
-    data class Success(val budget: Budget) : MainScreenUiState()
-    data class Failure(val throwable: Throwable) : MainScreenUiState()
-}
+data class MainScreenUiState(
+    val budget: Budget? = null
+)

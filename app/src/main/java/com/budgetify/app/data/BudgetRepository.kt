@@ -1,9 +1,9 @@
-package com.budgetify.app
+package com.budgetify.app.data
 
-import com.budgetify.app.model.Budget
-import com.budgetify.app.model.BudgetItem
-import com.budgetify.app.model.Category
-import com.budgetify.app.model.Currency
+import com.budgetify.app.data.model.Budget
+import com.budgetify.app.data.model.BudgetItem
+import com.budgetify.app.data.model.Category
+import com.budgetify.app.data.model.Currency
 
 interface BudgetRepository {
     suspend fun fetchBudget(): Result<Budget>
@@ -17,16 +17,16 @@ object BudgetRepositoryImpl : BudgetRepository {
     override suspend fun fetchBudget(): Result<Budget> = runCatching { checkNotNull(budget) }
 
     override suspend fun updateBudget(budget: Budget) {
-        this.budget = budget
+        BudgetRepositoryImpl.budget = budget
     }
 }
 
-private val mockBudget = Budget(
+val mockBudget = Budget(
     totalAmount = 59000.0,
     currency = Currency.ZAR,
     categories = listOf(
         Category(
-            title = "Investments",
+            name = "Investments",
             items = listOf(
                 BudgetItem(
                     title = "Crypto",
@@ -39,7 +39,7 @@ private val mockBudget = Budget(
             )
         ),
         Category(
-            title = "Savings",
+            name = "Savings",
             items = listOf(
                 BudgetItem(
                     title = "Tyme Emergency Fund",
@@ -48,7 +48,7 @@ private val mockBudget = Budget(
             )
         ),
         Category(
-            title = "Expenses",
+            name = "Expenses",
             items = listOf(
                 BudgetItem(
                     title = "Debit Orders",

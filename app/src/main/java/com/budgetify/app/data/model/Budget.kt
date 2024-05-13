@@ -1,4 +1,4 @@
-package com.budgetify.app.model
+package com.budgetify.app.data.model
 
 data class Budget(
     val totalAmount: Double,
@@ -7,9 +7,11 @@ data class Budget(
 )
 
 data class Category(
-    val title: String,
+    val name: String,
     val items: List<BudgetItem>
-)
+) {
+    val totalAmount: Double = items.sumOf { it.amount }
+}
 
 data class BudgetItem(
     val title: String,

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.budgetify"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -64,6 +64,9 @@ dependencies {
 
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+
+    // YCharts
+    implementation(libs.ycharts)
 
     testImplementation(libs.junit)
 
