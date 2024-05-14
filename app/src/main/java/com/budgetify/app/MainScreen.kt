@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -47,6 +48,7 @@ fun MainScreen(
         Column(
             modifier = modifier
                 .background(MaterialTheme.colorScheme.background)
+                .verticalScroll(rememberScrollState())
                 .padding(16.dp)
         ) {
             Header(
@@ -60,12 +62,15 @@ fun MainScreen(
                 budget = budget,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(320.dp)
             )
 
             Description(
                 budget = budget,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 20.dp)
+                    .height(700.dp)
             )
         }
     }
@@ -102,49 +107,51 @@ private fun Header(
 }
 
 @Composable
-private fun ColumnScope.Summary(
+private fun Summary(
     budget: Budget,
     modifier: Modifier = Modifier,
 ) {
     var selectedCategoryName by remember { mutableStateOf("") }
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-    ) {
-        budget.categories.forEach { category ->
-            val isSelected = category.name == selectedCategoryName
-            val width by animateIntAsState(if (isSelected) 112 else 110, label = "Card width")
-            val height by animateIntAsState(if (isSelected) 82 else 80, label = "Card height")
+    Column(modifier = modifier) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            budget.categories.forEach { category ->
+                val isSelected = category.name == selectedCategoryName
+                val width by animateIntAsState(if (isSelected) 112 else 110, label = "Card width")
+                val height by animateIntAsState(if (isSelected) 82 else 80, label = "Card height")
 
-            BudgetifyCard(
-                colors = CardDefaults.cardColors().copy(containerColor = category.color),
-                modifier = Modifier
-                    .width(width.dp)
-                    .height(height.dp)
-            ) {
-                CategorySummary(
-                    category = category,
-                    isSelected = isSelected,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
+                BudgetifyCard(
+                    colors = CardDefaults.cardColors().copy(containerColor = category.color),
+                    modifier = Modifier
+                        .width(width.dp)
+                        .height(height.dp)
+                ) {
+                    CategorySummary(
+                        category = category,
+                        isSelected = isSelected,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
             }
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        BudgetifyPieChart(
+            categories = budget.categories,
+            onCategorySliceClick = { categoryName ->
+                selectedCategoryName = categoryName
+            },
+            chartPadding = 40,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(280.dp)
+        )
     }
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    BudgetifyPieChart(
-        categories = budget.categories,
-        onCategorySliceClick = { categoryName ->
-            selectedCategoryName = categoryName
-        },
-        chartPadding = 40,
-        modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .size(280.dp)
-    )
 }
 
 @Composable
@@ -212,7 +219,8 @@ private fun CategorySection(
                         colors = CardDefaults.cardColors().copy(containerColor = category.color),
                         modifier = Modifier
                             .width(110.dp)
-                            .height(80.dp)
+                            .height(100.dp)
+                            .padding(bottom = 20.dp)
                     ) {
                         Column(modifier = modifier) {
                             BudgetifyText(

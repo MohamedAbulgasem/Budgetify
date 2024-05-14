@@ -33,7 +33,15 @@ val mockBudget = Budget(
                     amount = 5000.0
                 ),
                 BudgetItem(
-                    title = "Tax-free investment account",
+                    title = "Tax-free",
+                    amount = 3000.0
+                ),
+                BudgetItem(
+                    title = "Crypto",
+                    amount = 5000.0
+                ),
+                BudgetItem(
+                    title = "Tax-free",
                     amount = 3000.0
                 )
             )
@@ -50,6 +58,14 @@ val mockBudget = Budget(
         Category(
             name = "Expenses",
             items = listOf(
+                BudgetItem(
+                    title = "Debit Orders",
+                    amount = 9000.0
+                ),
+                BudgetItem(
+                    title = "Day-to-day spending",
+                    amount = 17000.0
+                ),
                 BudgetItem(
                     title = "Debit Orders",
                     amount = 9000.0
