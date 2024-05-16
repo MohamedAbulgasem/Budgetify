@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -41,7 +40,6 @@ fun BudgetifyText(
     Text(
         text = text,
         fontSize = fontSize,
-        fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Medium,
         color = color,
         textAlign = TextAlign.Center,
@@ -67,12 +65,12 @@ fun BudgetifyCard(
 }
 
 @Composable
-fun BudgetifyGradientCard(
+fun GradientCard(
     modifier: Modifier = Modifier,
     colors: List<Color> = listOf(
         MaterialTheme.colorScheme.primary,
         MaterialTheme.colorScheme.secondary,
-        MaterialTheme.colorScheme.tertiary,
+        MaterialTheme.colorScheme.inversePrimary,
     ),
     content: @Composable BoxScope.() -> Unit,
 ) {
@@ -112,7 +110,9 @@ fun BudgetifyPieChart(
         labelColorType = PieChartConfig.LabelColorType.SLICE_COLOR,
         labelFontSize = 32.sp,
         chartPadding = chartPadding,
-        strokeWidth = 90.0f
+        strokeWidth = 90.0f,
+        activeSliceAlpha = 0.7f,
+        inActiveSliceAlpha = 0.9f,
     )
 
     DonutPieChart(

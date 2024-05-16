@@ -33,7 +33,7 @@ import com.budgetify.app.data.mockBudget
 import com.budgetify.app.data.model.Budget
 import com.budgetify.app.data.model.Category
 import com.budgetify.app.ui.component.BudgetifyCard
-import com.budgetify.app.ui.component.BudgetifyGradientCard
+import com.budgetify.app.ui.component.GradientCard
 import com.budgetify.app.ui.component.BudgetifyPieChart
 import com.budgetify.app.ui.component.BudgetifyText
 import com.budgetify.app.ui.theme.BudgetifyTheme
@@ -81,7 +81,7 @@ private fun Header(
     budget: Budget,
     modifier: Modifier = Modifier,
 ) {
-    BudgetifyGradientCard(modifier = modifier) {
+    GradientCard(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -89,7 +89,7 @@ private fun Header(
         ) {
             BudgetifyText(
                 text = "Total money in",
-                fontSize = 14.sp,
+                fontSize = 22.sp,
                 modifier = Modifier.align(Alignment.Start)
             )
 
@@ -124,18 +124,12 @@ private fun Summary(
                 val width by animateIntAsState(if (isSelected) 112 else 110, label = "Card width")
                 val height by animateIntAsState(if (isSelected) 82 else 80, label = "Card height")
 
-                BudgetifyCard(
-                    colors = CardDefaults.cardColors().copy(containerColor = category.color),
+                CategorySummary(
+                    category = category,
+                    isSelected = isSelected,
                     modifier = Modifier
-                        .width(width.dp)
-                        .height(height.dp)
-                ) {
-                    CategorySummary(
-                        category = category,
-                        isSelected = isSelected,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-                }
+                        .size(width = width.dp, height = height.dp)
+                )
             }
         }
 
@@ -176,19 +170,24 @@ private fun CategorySummary(
     isSelected: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
-        BudgetifyText(
-            text = category.name,
-            fontSize = if (isSelected) 13.sp else 12.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 12.dp)
-        )
-        BudgetifyText(
-            text = category.totalAmount.toFormattedAmount(),
-            fontSize = if (isSelected) 17.sp else 16.sp,
-            modifier = Modifier.fillMaxWidth()
-        )
+    BudgetifyCard(
+        colors = CardDefaults.cardColors().copy(containerColor = category.color),
+        modifier = modifier
+    ) {
+        Column(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            BudgetifyText(
+                text = category.name,
+                fontSize = if (isSelected) 13.sp else 12.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp)
+            )
+            BudgetifyText(
+                text = category.totalAmount.toFormattedAmount(),
+                fontSize = if (isSelected) 17.sp else 16.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -206,7 +205,7 @@ private fun CategorySection(
                 .align(Alignment.CenterHorizontally)
                 .height(40.dp)
         )
-        
+
         Spacer(modifier = Modifier.height(20.dp))
 
         LazyVerticalGrid(
@@ -256,7 +255,7 @@ private fun MainScreenPreview() {
 val Category.color: Color
     @Composable get() = when (name) {
         "Investments" -> MaterialTheme.colorScheme.primary
-        "Savings" -> MaterialTheme.colorScheme.secondary
+        "Savings" -> Color(0xFF54A276)
         "Expenses" -> MaterialTheme.colorScheme.tertiary
         else -> MaterialTheme.colorScheme.primary
     }

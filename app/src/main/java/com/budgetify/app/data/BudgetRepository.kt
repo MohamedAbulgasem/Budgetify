@@ -22,37 +22,41 @@ object BudgetRepositoryImpl : BudgetRepository {
 }
 
 val mockBudget = Budget(
-    totalAmount = 59000.0,
+    totalAmount = 30000.0,
     currency = Currency.ZAR,
     categories = listOf(
         Category(
             name = "Investments",
             items = listOf(
                 BudgetItem(
-                    title = "Crypto",
-                    amount = 5000.0
-                ),
-                BudgetItem(
-                    title = "Tax-free",
+                    title = "Tax-free acc",
                     amount = 3000.0
                 ),
                 BudgetItem(
-                    title = "Crypto",
-                    amount = 5000.0
+                    title = "S&P 500",
+                    amount = 1000.0
                 ),
                 BudgetItem(
-                    title = "Tax-free",
-                    amount = 3000.0
-                )
+                    title = "Local stocks",
+                    amount = 1000.0
+                ),
+                BudgetItem(
+                    title = "Crypto",
+                    amount = 1000.0
+                ),
             )
         ),
         Category(
             name = "Savings",
             items = listOf(
                 BudgetItem(
-                    title = "Tyme Emergency Fund",
-                    amount = 25000.0
-                )
+                    title = "Holiday",
+                    amount = 2000.0
+                ),
+                BudgetItem(
+                    title = "Emergency Fund",
+                    amount = 1000.0
+                ),
             )
         ),
         Category(
@@ -60,20 +64,16 @@ val mockBudget = Budget(
             items = listOf(
                 BudgetItem(
                     title = "Debit Orders",
-                    amount = 9000.0
+                    amount = 13000.0
                 ),
                 BudgetItem(
-                    title = "Day-to-day spending",
-                    amount = 17000.0
+                    title = "Food",
+                    amount = 5000.0
                 ),
                 BudgetItem(
-                    title = "Debit Orders",
-                    amount = 9000.0
+                    title = "Other spending",
+                    amount = 3000.0
                 ),
-                BudgetItem(
-                    title = "Day-to-day spending",
-                    amount = 17000.0
-                )
             )
         ),
     )
