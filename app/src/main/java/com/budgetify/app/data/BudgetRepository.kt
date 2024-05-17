@@ -25,8 +25,7 @@ val mockBudget = Budget(
     totalAmount = 30000.0,
     currency = Currency.ZAR,
     categories = listOf(
-        Category(
-            name = "Investments",
+        Category.Investments(
             items = listOf(
                 BudgetItem(
                     title = "Tax-free acc",
@@ -46,8 +45,7 @@ val mockBudget = Budget(
                 ),
             )
         ),
-        Category(
-            name = "Savings",
+        Category.Savings(
             items = listOf(
                 BudgetItem(
                     title = "Holiday",
@@ -59,8 +57,7 @@ val mockBudget = Budget(
                 ),
             )
         ),
-        Category(
-            name = "Expenses",
+        Category.Expenses(
             items = listOf(
                 BudgetItem(
                     title = "Debit Orders",

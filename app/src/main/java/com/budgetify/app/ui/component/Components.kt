@@ -27,7 +27,6 @@ import co.yml.charts.common.model.PlotType
 import co.yml.charts.ui.piechart.charts.DonutPieChart
 import co.yml.charts.ui.piechart.models.PieChartConfig
 import co.yml.charts.ui.piechart.models.PieChartData
-import com.budgetify.app.color
 import com.budgetify.app.data.model.Category
 
 @Composable
